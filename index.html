@@ -3,110 +3,250 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Welcome to Heaven 🌌</title>
+  <title>Yo, freeloader</title>
   <style>
-    /* === BODY AND SKY === */
     body {
-      margin: 0;
-      height: 100vh;
-      font-family: 'Segoe UI', Arial, sans-serif;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      min-height: 100vh;
+      margin: 0;
       overflow: hidden;
-      background: linear-gradient(to top, #ff9a9e 0%, #fad0c4 50%, #a18cd1 100%);
-      animation: skyShift 60s ease-in-out infinite alternate;
-      color: #fff;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      color: #eee;
       text-align: center;
     }
 
-    @keyframes skyShift {
-      0% { background: linear-gradient(to top, #ff9a9e 0%, #fad0c4 50%, #a18cd1 100%); }
-      50% { background: linear-gradient(to top, #a1c4fd 0%, #c2e9fb 50%, #667eea 100%); }
-      100% { background: linear-gradient(to top, #ffecd2 0%, #fcb69f 50%, #ff9a9e 100%); }
+    #bg-video {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      z-index: -1;
     }
 
-    /* === FLOATING BUTTONS === */
-    .btn {
+    .overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.55);
+      z-index: 0;
+    }
+
+    #preloader {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: #000;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.5rem;
-      padding: 0.6rem 1.2rem;
-      margin: 15px;
-      border-radius: 12px;
-      text-decoration: none;
-      color: white;
-      font-weight: bold;
-      box-shadow: 0 0 15px #00000033;
-      transition: all 0.3s ease;
-      animation: float 4s ease-in-out infinite;
+      font-size: 2rem;
+      color: #fff;
+      z-index: 9999;
+      animation: fadeOut 1s ease forwards;
+      animation-delay: 3s;
+    }
+    @keyframes fadeOut {
+      to { opacity: 0; visibility: hidden; }
+    }
+    #preloader span {
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0% { opacity: 0.3; }
+      50% { opacity: 1; }
+      100% { opacity: 0.3; }
     }
 
-    .btn img {
-      width: 24px;
-      height: 24px;
-      margin-right: 8px;
-    }
-
-    @keyframes float {
-      0% { transform: translateY(0px); }
-      50% { transform: translateY(-15px); }
-      100% { transform: translateY(0px); }
-    }
-
-    .btn:hover { transform: scale(1.1); filter: brightness(1.2); }
-
-    /* === BRAND COLORS === */
-    .facebook { background-color: #1877f2; box-shadow: 0 0 25px #1877f2; }
-    .linkedin { background-color: #0a66c2; box-shadow: 0 0 25px #0a66c2; }
-    .instagram { background-color: #e1306c; box-shadow: 0 0 25px #e1306c; }
-
-    /* === TITLE === */
     h1 {
       font-size: 2.5rem;
+      color: #fff;
+      text-shadow: 0 0 15px #ffffff55;
       margin-bottom: 40px;
-      text-shadow: 0 0 15px #fff;
+      letter-spacing: 2px;
       animation: glowTitle 3s ease-in-out infinite alternate;
+      z-index: 1;
     }
-
     @keyframes glowTitle {
-      from { text-shadow: 0 0 15px #ff9a9e, 0 0 25px #fad0c4; }
-      to { text-shadow: 0 0 25px #a18cd1, 0 0 45px #c2e9fb; }
+      from { text-shadow: 0 0 15px #4da6ff55, 0 0 25px #4da6ff33; }
+      to { text-shadow: 0 0 25px #ff66ccaa, 0 0 45px #00ff99aa; }
     }
 
-    /* === ABOUT ME SECTION === */
+    a {
+      font-size: 1.5rem;
+      text-decoration: none;
+      border: 2px solid;
+      padding: 0.6rem 1.4rem;
+      border-radius: 14px;
+      margin: 10px;
+      transition: all 0.4s ease;
+      z-index: 1;
+      backdrop-filter: blur(2px);
+      position: relative;
+      display: inline-block;
+    }
+
+    a.movies {
+      color: #4da6ff;
+      border-color: #4da6ff;
+      box-shadow: 0 0 15px #4da6ff55;
+      animation: float1 6s ease-in-out infinite alternate;
+    }
+    a.sports {
+      color: #00ff99;
+      border-color: #00ff99;
+      box-shadow: 0 0 15px #00ff9955;
+      animation: float2 7s ease-in-out infinite alternate;
+    }
+    a.anime {
+      color: #ff66cc;
+      border-color: #ff66cc;
+      box-shadow: 0 0 15px #ff66cc55;
+      animation: float3 8s ease-in-out infinite alternate;
+    }
+
+    a.movies:hover {
+      background: #4da6ff; color: #111;
+      box-shadow: 0 0 35px #4da6ff; transform: scale(1.1);
+    }
+    a.sports:hover {
+      background: #00ff99; color: #111;
+      box-shadow: 0 0 35px #00ff99; transform: scale(1.1);
+    }
+    a.anime:hover {
+      background: #ff66cc; color: #111;
+      box-shadow: 0 0 35px #ff66cc; transform: scale(1.1);
+    }
+
+    @keyframes float1 {
+      0% { transform: translate(0, 0); }
+      50% { transform: translate(-15px, -25px); }
+      100% { transform: translate(15px, 10px); }
+    }
+    @keyframes float2 {
+      0% { transform: translate(0, 0); }
+      50% { transform: translate(20px, -20px); }
+      100% { transform: translate(-10px, 15px); }
+    }
+    @keyframes float3 {
+      0% { transform: translate(0, 0); }
+      50% { transform: translate(-20px, 15px); }
+      100% { transform: translate(15px, -10px); }
+    }
+
+    /* About Me */
     .about-me {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      z-index: 2;
-      animation: float 5s ease-in-out infinite;
+      z-index: 1;
+      color: #fff;
+      text-align: center;
+      margin-top: 40px;
     }
-
+    .about-me h2 {
+      font-size: 2rem;
+      color: #ffcc00;
+      text-shadow: 0 0 15px #ffcc0055;
+      margin-bottom: 10px;
+    }
     .about-me p {
       font-size: 1.2rem;
       margin-bottom: 15px;
-      text-shadow: 0 0 5px #00000033;
+    }
+    .about-me a {
+      display: inline-block;
+      margin: 5px 10px;
+      font-size: 1.2rem;
+      color: #4da6ff;
+      border: 2px solid #4da6ff;
+      padding: 0.4rem 1rem;
+      border-radius: 10px;
+      text-decoration: none;
+      transition: all 0.3s;
+      box-shadow: 0 0 10px #4da6ff55;
+    }
+    .about-me a:hover {
+      background: #4da6ff;
+      color: #111;
+      box-shadow: 0 0 30px #4da6ff;
+      transform: scale(1.1);
+    }
+    .about-me img {
+      width: 18px;
+      height: 18px;
+      vertical-align: middle;
+      margin-right: 6px;
+    }
+
+    /* Mute/Unmute Button */
+    #mute-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: rgba(0,0,0,0.6);
+      color: #fff;
+      border: 2px solid #4da6ff;
+      padding: 10px 16px;
+      border-radius: 10px;
+      cursor: pointer;
+      z-index: 10;
+      font-size: 1rem;
+      box-shadow: 0 0 15px #4da6ff55;
+      transition: all 0.3s ease;
+    }
+    #mute-btn:hover {
+      background: #4da6ff;
+      color: #111;
+      box-shadow: 0 0 25px #4da6ff;
+      transform: scale(1.1);
     }
   </style>
 </head>
 <body>
-  <h1>🌌 Welcome to Heaven, Freebies 🌌</h1>
+  <div id="preloader"><span>Loading…</span></div>
 
-  <!-- About Me Section -->
+  <video autoplay muted loop playsinline id="bg-video">
+    <source src="ghost-of-tsushima.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+
+  <div class="overlay"></div>
+
+  <h1> Enjoy, Freebies </h1>
+
+  <a class="movies" href="https://moviebox.ph">🎬 Watch Movies / Dramas</a>
+  <a class="sports" href="https://tv-shihab.xyz/">⚽ Watch Sports</a>
+  <a class="anime" href="https://animepahe.si/">🎌 Watch Anime</a>
+
   <div class="about-me">
+    <h2>About Me</h2>
     <p>Hi! I’m Kabbya Chatterjee. Connect with me:</p>
-    <a class="btn facebook" href="https://www.facebook.com/kabbya.chatterjee.none?rdid=Er3F8weAjvemu08r&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F16xZNatAer%2F#" target="_blank">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Facebook_Logo_%282019%29.png" alt="Facebook Logo"> Facebook
+    <a class="btn facebook" href="https://www.facebook.com/kabbya.chatterjee.none" target="_blank">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Facebook_Logo_%282019%29.png"> Facebook
     </a>
     <a class="btn linkedin" href="https://www.linkedin.com/in/kabbya-chatterjee/" target="_blank">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/0/01/LinkedIn_Logo.svg" alt="LinkedIn Logo"> LinkedIn
+      <img src="https://upload.wikimedia.org/wikipedia/commons/0/01/LinkedIn_Logo.svg"> LinkedIn
     </a>
-    <a class="btn instagram" href="https://www.instagram.com/codex_chronicles?igsh=YXZ4NHp5anB5Z2s4" target="_blank">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Instagram_logo_2016.svg" alt="Instagram Logo"> Instagram
+    <a class="btn instagram" href="https://www.instagram.com/codex_chronicles" target="_blank">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Instagram_logo_2016.svg"> Instagram
     </a>
   </div>
+
+  <button id="mute-btn">🔊 Unmute</button>
+
+  <script>
+    const video = document.getElementById("bg-video");
+    const btn = document.getElementById("mute-btn");
+
+    btn.addEventListener("click", () => {
+      if (video.muted) {
+        video.muted = false;
+        btn.textContent = "🔇 Mute";
+      } else {
+        video.muted = true;
+        btn.textContent = "🔊 Unmute";
+      }
+    });
+  </script>
 </body>
 </html>
