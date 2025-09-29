@@ -1,0 +1,10 @@
+# look, i’m just ignoring stuff because i don’t want to deal with it
+node_modules/
+dist/
+.env
+.DS_Store
+.idea/
+.vscode/
+*.log
+*.tmp
+# please don’t judge me
